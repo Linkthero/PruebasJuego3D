@@ -86,62 +86,83 @@ public class Boss : Enemigo
                         break;
 
                     case 2:
-                        //Lanzallamas
+                        ////Lanzallamas
+                        //animator.SetBool("walk", false);
+                        //animator.SetBool("run", false);
+                        //animator.SetBool("attack", true);
+                        //animator.SetFloat("skill", 0);
+                        //transform.rotation = Quaternion.RotateTowards(transform.rotation, rotation, 2);
+                        //rango.GetComponent<CapsuleCollider>().enabled = false;
+
+                        //CURA 
                         animator.SetBool("walk", false);
                         animator.SetBool("run", false);
                         animator.SetBool("attack", true);
                         animator.SetFloat("skill", 0);
-                        transform.rotation = Quaternion.RotateTowards(transform.rotation, rotation, 2);
-                        rango.GetComomponent<CapsuleCollider>().enabled = false;
 
+                        //aumenta vida
                         break;
 
                     case 3:
                         //Jumpattack
-                        if (fase == 2)
-                        {
-                            jump_distance += 1 * Time.deltaTime;
-                            animator.SetBool("walk", false);
-                            animator.SetBool("run", false);
-                            animator.SetBool("attack", true);
-                            animator.SetFloat("skill", 0);
-                            hit_select = 3;
-                            rango.GetComomponent<CapsuleCollider>().enabled = false;
+                        //if (fase == 2)
+                        //{
+                        //    jump_distance += 1 * Time.deltaTime;
+                        //    animator.SetBool("walk", false);
+                        //    animator.SetBool("run", false);
+                        //    animator.SetBool("attack", true);
+                        //    animator.SetFloat("skill", 0);
+                        //    hit_select = 3;
+                        //    rango.GetComponent<CapsuleCollider>().enabled = false;
 
-                            if (direction_Skill)
-                            {
-                                if (jump_distance < 1f)
-                                {
-                                    transform.rotation = Quaternion.RotateTowards(transform.rotation, rotation, 2);
-                                }
+                        //    if (direction_Skill)
+                        //    {
+                        //        if (jump_distance < 1f)
+                        //        {
+                        //            transform.rotation = Quaternion.RotateTowards(transform.rotation, rotation, 2);
+                        //        }
 
-                                transform.Translate(Vector3.forward * 8 * Time.deltaTime);
-                            }
-                        }
-                        else
-                        {
-                            rutina = 0;
-                            cronometro = 0;
-                        }
+                        //        transform.Translate(Vector3.forward * 8 * Time.deltaTime);
+                        //    }
+                        //}
+                        //else
+                        //{
+                        //    rutina = 0;
+                        //    cronometro = 0;
+                        //}
+
+                        //SPAWNEA ENEMIGOS
+                        animator.SetBool("walk", false);
+                        animator.SetBool("run", false);
+                        animator.SetBool("attack", true);
+                        animator.SetFloat("skill", 0.4f);
+
+
                         break;
 
                     case 4:
                         //Fireball
 
-                        if (fase == 2)
-                        {
-                            animator.SetBool("walk", false);
-                            animator.SetBool("run", false);
-                            animator.SetBool("attack", true);
-                            animator.SetFloat("skill", 0);
-                            rango.GetComomponent<CapsuleCollider>().enabled = false;
-                            transform.rotation = Quaternion.RotateTowards(transform.rotation, rotation, 0.5f);
-                        }
-                        else
-                        {
-                            rutina = 0;
-                            cronometro = 0;
-                        }
+                        //if (fase == 2)
+                        //{
+                        //    animator.SetBool("walk", false);
+                        //    animator.SetBool("run", false);
+                        //    animator.SetBool("attack", true);
+                        //    animator.SetFloat("skill", 0);
+                        //    rango.GetComponent<CapsuleCollider>().enabled = false;
+                        //    transform.rotation = Quaternion.RotateTowards(transform.rotation, rotation, 0.5f);
+                        //}
+                        //else
+                        //{
+                        //    rutina = 0;
+                        //    cronometro = 0;
+                        //}
+
+                        //Ataque melee
+                        animator.SetBool("walk", false);
+                        animator.SetBool("run", false);
+                        animator.SetBool("attack", true);
+                        animator.SetFloat("skill", 0.2f);
                         break;
 
                 }
@@ -149,17 +170,17 @@ public class Boss : Enemigo
         }
     }
 
-    public void ComportamientoEnemigo()
+    new public void ComportamientoEnemigo()
     {
         //no hago nada
     }
 
-    public void Final_Ani()
+    new public void Final_Ani()
     {
         rutina = 0;
         animator.SetBool("attack", false);
         atacando = false;
-        rango.GetComomponent<CapsuleCollider>().enabled = true;
+        rango.GetComponent<CapsuleCollider>().enabled = true;
         lanzallamas = false;
         jump_distance = 0;
         direction_Skill = false;
@@ -177,12 +198,12 @@ public class Boss : Enemigo
 
     public void ColliderWeaponTrue()
     {
-        hit[hit_select].GetComomponent<SphereCollider>().enabled = true;
+        hit[hit_select].GetComponent<SphereCollider>().enabled = true;
     }
 
     public void ColliderWeaponFalse()
     {
-               hit[hit_select].GetComomponent<SphereCollider>().enabled = false;
+               hit[hit_select].GetComponent<SphereCollider>().enabled = false;
     }
 
     //Lanzallamas
