@@ -46188,7 +46188,7 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 2.6
-    functionName: Final_Ani
+    functionName: Final_AniBoss
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

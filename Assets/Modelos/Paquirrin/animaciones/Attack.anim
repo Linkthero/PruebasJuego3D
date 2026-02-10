@@ -57398,7 +57398,7 @@ AnimationClip:
     intParameter: 0
     messageOptions: 0
   - time: 2.6333334
-    functionName: Final_Ani
+    functionName: Final_AniBoss
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
