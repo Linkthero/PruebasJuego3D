@@ -90,6 +90,18 @@ public class Enemigo : MonoBehaviour
         atacando = false;
     }
 
+    public float GetPosX()
+    {
+        return transform.position.x;
+    }
+
+    public float GetPosY() {
+        return transform.position.y;
+    }
+     public float GetPosZ() {
+        return transform.position.z;
+     }
+
     //private void OnTriggerEnter(Collider other)
     //{
     //    if(other.CompareTag("Player"))
@@ -99,3 +111,4 @@ public class Enemigo : MonoBehaviour
     //    }
     //}
 }
+
