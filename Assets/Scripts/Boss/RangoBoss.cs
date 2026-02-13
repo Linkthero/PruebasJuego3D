@@ -3,7 +3,7 @@ using UnityEngine;
 public class RangoBoss : MonoBehaviour
 {
     public Animator animator;
-    public Boss boss;
+    public BossPaquirrin boss;
     public int melee;
 
     private void OnTriggerEnter(Collider other)

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Boss : MonoBehaviour
+public class BossPaquirrin : MonoBehaviour
 {
     //Codigo enemigo base //
     [Header("Codigo enemigo base")]
@@ -31,6 +31,7 @@ public class Boss : MonoBehaviour
     
     public int hit_select;
 
+    [Header("Lanzallamas")]
     ///////////Lanzallamas//////////////
     public bool lanzallamas;
     public List<GameObject> pool = new List<GameObject>();  //almacena las esferas
@@ -38,15 +39,18 @@ public class Boss : MonoBehaviour
     public GameObject cabeza;   //punto donde salen las esferas
     private float cronometro2;      //tiempo entre esferas
 
+    [Header("Ataque salto")]
     ///////////Jump Attack/////////////////////////
     public float jump_distance;     //distancia para saltar
     public bool direction_Skill;    //direccion del salto
 
+    [Header("bola de fuego")]
     ///////////FireBall//////////////////
     public GameObject fire_ball;   //prefab bola de fuego
     public GameObject point;    //de donde salen
     public List<GameObject> pool2 = new List<GameObject>();  //almacena las bolas de fuego
 
+    [Header("Vida")]
     public int fase = 1;    //fase boss
     public float HP_Min;    //vida minima
     public float HP_Max;    //vida maxima
@@ -224,6 +228,11 @@ public class Boss : MonoBehaviour
 
                 }
             }
+        } else
+        {
+            animator.SetBool("walk", false);
+            animator.SetBool("run", false);
+            animator.SetBool("attack", false);
         }
     }
 
