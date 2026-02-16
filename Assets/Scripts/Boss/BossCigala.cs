@@ -79,63 +79,33 @@ public class BossCigala : MonoBehaviour
                         break;
 
                     case 1:
-                        //ATAQUE MELEE
+                        //ATAQUE AREA
                         if (Vector3.Distance(transform.position, target.transform.position) < 2)
                         {
-                            Debug.Log("ATACA");
+                            hit_select = 0;
                             atacando = true;
                             transform.rotation = Quaternion.RotateTowards(transform.rotation, rotation, 2); //gira hacia el jugador
                             animator.SetBool("walk", false);
                             animator.SetBool("run", false);
                             animator.SetBool("attack", true);
-                            animator.SetFloat("skills", 0);
+                            animator.SetFloat("skills", 1);
 
                         }
 
-                        break;
+                            break;
 
                     case 2:
                         //Lanzallamas
+                        hit_select = 1;
+                        atacando = true;
                         animator.SetBool("walk", false);
                         animator.SetBool("run", false);
                         animator.SetBool("attack", true);
-                        animator.SetFloat("skill", 0);
+                        animator.SetFloat("skills", 0);
                         transform.rotation = Quaternion.RotateTowards(transform.rotation, rotation, 2);
                         rango.GetComponent<CapsuleCollider>().enabled = false;
 
                         break;
-
-                    case 3:
-                        //Jumpattack
-                        //if (fase == 2)
-                        //{
-                        //    jump_distance += 1 * Time.deltaTime;
-                        //    animator.SetBool("walk", false);
-                        //    animator.SetBool("run", false);
-                        //    animator.SetBool("attack", true);
-                        //    animator.SetFloat("skill", 0);
-                        //    hit_select = 3;
-                        //    rango.GetComponent<CapsuleCollider>().enabled = false;
-
-                        //    if (direction_Skill)
-                        //    {
-                        //        if (jump_distance < 1f)
-                        //        {
-                        //            transform.rotation = Quaternion.RotateTowards(transform.rotation, rotation, 2);
-                        //        }
-
-                        //        transform.Translate(Vector3.forward * 8 * Time.deltaTime);
-                        //    }
-                        //}
-                        //else
-                        //{
-                        //    rutina = 0;
-                        //    cronometro = 0;
-                        //}
-
-                        break;
-
-
                 }
             }
         } else
