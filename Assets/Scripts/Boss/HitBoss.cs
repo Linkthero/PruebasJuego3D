@@ -9,6 +9,7 @@ public class HitBoss : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             other.GetComponent<Player>().HP_Min -= damage;
+            Debug.Log("HAGO DAÑO A PLAYER");
         }
     }
 }

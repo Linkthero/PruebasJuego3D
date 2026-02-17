@@ -180,10 +180,10 @@ public class BossCigala : MonoBehaviour
     {
         ComportamientoBoss();
 
-        if (lanzallamas)
-        {
-            Lanzallamas_Skill();
-        }
+        //if (lanzallamas)
+        //{
+        //    Lanzallamas_Skill();
+        //}
     }
 
     private void Update()
