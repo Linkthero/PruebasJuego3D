@@ -22,24 +22,7 @@ public class BossFary : MonoBehaviour
 
     public int hit_select;
 
-    [Header("Lanzallamas")]
-    ///////////Lanzallamas//////////////
-    public bool lanzallamas;
-    public List<GameObject> pool = new List<GameObject>();  //almacena las esferas
-    public GameObject fire;     //prefab de esferas
-    public GameObject cabeza;   //punto donde salen las esferas
-    private float cronometro2;      //tiempo entre esferas
-
-    [Header("Ataque salto")]
-    ///////////Jump Attack/////////////////////////
-    public float jump_distance;     //distancia para saltar
-    public bool direction_Skill;    //direccion del salto
-
-    [Header("bola de fuego")]
-    ///////////FireBall//////////////////
-    public GameObject fire_ball;   //prefab bola de fuego
-    public GameObject point;    //de donde salen
-    public List<GameObject> pool2 = new List<GameObject>();  //almacena las bolas de fuego
+    public GameObject rayosPrefab;
 
     [Header("Vida")]
     public int fase = 1;    //fase boss
@@ -63,7 +46,6 @@ public class BossFary : MonoBehaviour
             var lookPos = target.transform.position - transform.position;   //calcula la direccion hacia el jugador
             lookPos.y = 0; //para que no mire hacia arriba o abajo, solo en el plano horizontal
             var rotation = Quaternion.LookRotation(lookPos); //gira hacia el jugador
-            point.transform.LookAt(target.transform.position); //el punto de donde salen las bolas de fuego mira al jugador para que las bolas vayan hacia el jugador
             //musica.enabled = true;
 
             cronometro += 1 * Time.deltaTime;   //aumenta el cronometro para cambiar de rutina cada cierto tiempo
@@ -107,91 +89,24 @@ public class BossFary : MonoBehaviour
                         break;
 
                     case 2:
-                        ////Lanzallamas
-                        //animator.SetBool("walk", false);
-                        //animator.SetBool("run", false);
-                        //animator.SetBool("attack", true);
-                        //animator.SetFloat("skill", 0);
-                        //transform.rotation = Quaternion.RotateTowards(transform.rotation, rotation, 2);
-                        //rango.GetComponent<CapsuleCollider>().enabled = false;
-
-                        //CURA 
-                        if ((HP_Min < HP_Max * 0.5f) ) //si la vida es menor al 50%, se cura un 20% de su vida maxima, pero no puede superar su vida maxima
-                        {
-                            animator.SetBool("walk", false);
-                            animator.SetBool("run", false);
-                            animator.SetBool("attack", true);
-                            animator.SetFloat("skills", 0.1f);
-
-                            HP_Min += HP_Max * 0.2f;
-                            barra.fillAmount = HP_Min / HP_Max;
-                            Debug.Log("CURA");
-                        } 
+                        //Ataque magico 
+                        animator.SetBool("walk", false);
+                        animator.SetBool("run", false);
+                        animator.SetBool("attack", true);
+                        animator.SetFloat("skills", 0.5f);
+                        
+                        //haz aparecer sobvre el personje
                         break;
 
                     case 3:
-                        //Jumpattack
-                        //if (fase == 2)
-                        //{
-                        //    jump_distance += 1 * Time.deltaTime;
-                        //    animator.SetBool("walk", false);
-                        //    animator.SetBool("run", false);
-                        //    animator.SetBool("attack", true);
-                        //    animator.SetFloat("skill", 0);
-                        //    hit_select = 3;
-                        //    rango.GetComponent<CapsuleCollider>().enabled = false;
-
-                        //    if (direction_Skill)
-                        //    {
-                        //        if (jump_distance < 1f)
-                        //        {
-                        //            transform.rotation = Quaternion.RotateTowards(transform.rotation, rotation, 2);
-                        //        }
-
-                        //        transform.Translate(Vector3.forward * 8 * Time.deltaTime);
-                        //    }
-                        //}
-                        //else
-                        //{
-                        //    rutina = 0;
-                        //    cronometro = 0;
-                        //}
-
-                        //SPAWNEA ENEMIGOS
-                        //if((listaMinioms.Count < 4) && !invocando)
-                        //{
-                        //    invocando = true;
-                        //    animator.SetBool("walk", false);
-                        //    animator.SetBool("run", false);
-                        //    animator.SetBool("attack", true);
-                        //    animator.SetFloat("skills", 0.2f);
-                        //} 
+                        //BLOCK
+                        animator.SetBool("walk", false);
+                        animator.SetBool("run", false);
+                        animator.SetBool("attack", true);
+                        animator.SetFloat("skills", 1f);
+                         
                             break;
 
-                    //case 3:
-                    //    //Fireball
-
-                    //    //if (fase == 2)
-                    //    //{
-                    //    //    animator.SetBool("walk", false);
-                    //    //    animator.SetBool("run", false);
-                    //    //    animator.SetBool("attack", true);
-                    //    //    animator.SetFloat("skill", 0);
-                    //    //    rango.GetComponent<CapsuleCollider>().enabled = false;
-                    //    //    transform.rotation = Quaternion.RotateTowards(transform.rotation, rotation, 0.5f);
-                    //    //}
-                    //    //else
-                    //    //{
-                    //    //    rutina = 0;
-                    //    //    cronometro = 0;
-                    //    //}
-
-                    //    //Ataque melee
-                    //    animator.SetBool("walk", false);
-                    //    animator.SetBool("run", false);
-                    //    animator.SetBool("attack", true);
-                    //    animator.SetFloat("skill", 0.2f);
-                    //    break;
 
                 }
             }
@@ -210,21 +125,14 @@ public class BossFary : MonoBehaviour
         animator.SetBool("attack", false);
         atacando = false;
         rango.GetComponent<CapsuleCollider>().enabled = true;
-        lanzallamas = false;
-        jump_distance = 0;
-        direction_Skill = false;
     }
 
-
-    public void Direction_Attack_Start()
+    public void CreaRayos()
     {
-        direction_Skill = true;
+        GameObject rayos = Instantiate(rayosPrefab, target.transform.position, Quaternion.identity);
+        Destroy(rayos, 5f);
     }
 
-    public void Direction_Attack_End()
-    {
-        direction_Skill = false;
-    }
 
     public void ColliderWeaponTrue()
     {
@@ -236,65 +144,8 @@ public class BossFary : MonoBehaviour
         hit[hit_select].GetComponent<SphereCollider>().enabled = false;
     }
 
-    //Lanzallamas
-    public GameObject GetBala()
-    {
-        for(int i = 0; i < pool.Count; i++)
-        {
-            if (!pool[i].activeInHierarchy)
-            {
-                pool[i].SetActive(true);
-                return pool[i];
-            }
-        }
-        GameObject obj = Instantiate(fire, cabeza.transform.position, cabeza.transform.rotation) as GameObject;
-        pool.Add(obj);
-        return obj;
-    }
 
-    public void Lanzallamas_Skill()
-    {
-        cronometro2 += 1* Time.deltaTime;
-        if (cronometro2 > 0.1f)
-        {
-            GameObject bala = GetBala();
-            bala.transform.position = cabeza.transform.position;
-            bala.transform.rotation = cabeza.transform.rotation;
-            cronometro2 = 0;
-        }
-    }
 
-    public void Start_Fire()
-    {
-        lanzallamas = true;
-    }
-
-    public void Stop_Fire()
-    {
-        lanzallamas = false;
-    }
-
-    public GameObject Get_Fire_Ball()   //
-    {
-        for(int i = 0; i< pool2.Count; i++)
-        {
-            if (!pool2[i].activeInHierarchy)
-            {
-                pool2[i].SetActive(true);
-                return pool2[i];
-            }
-        }
-        GameObject obj = Instantiate(fire_ball, point.transform.position, point.transform.rotation) as GameObject;
-        pool2.Add(obj);
-        return obj;
-    }
-
-    public void Fire_Ball_Skill()
-    {
-        GameObject bola = Get_Fire_Ball();
-        bola.transform.position = point.transform.position;
-        bola.transform.rotation = point.transform.rotation;
-    }
 
     public void Vivo() { 
     //{
