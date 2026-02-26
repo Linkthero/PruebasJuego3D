@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class BossFary : MonoBehaviour
+public class BossLobo : MonoBehaviour
 {
     //Codigo enemigo base //
     [Header("Codigo enemigo base")]
@@ -86,9 +86,9 @@ public class BossFary : MonoBehaviour
                             animator.SetBool("run", false);
                             animator.SetBool("attack", true);
                             animator.SetFloat("skills", 0);
-                            
-                        } 
-                        
+
+                        }
+
                         break;
 
                     case 2:
@@ -98,7 +98,7 @@ public class BossFary : MonoBehaviour
                         animator.SetBool("attack", true);
                         animator.SetFloat("skills", 0.5f);
 
-                       
+
 
                         break;
 
@@ -108,13 +108,14 @@ public class BossFary : MonoBehaviour
                         animator.SetBool("run", false);
                         animator.SetBool("attack", true);
                         animator.SetFloat("skills", 1f);
-                         
-                            break;
+
+                        break;
 
 
                 }
             }
-        } else
+        }
+        else
         {
             animator.SetBool("walk", false);
             animator.SetBool("run", false);
@@ -151,13 +152,14 @@ public class BossFary : MonoBehaviour
 
 
 
-    public void Vivo() { 
-    //{
-    //    if(HP_Min < 500)
-    //    {
-    //        fase = 2;
-    //        time_rutinas = 1;
-    //    }
+    public void Vivo()
+    {
+        //{
+        //    if(HP_Min < 500)
+        //    {
+        //        fase = 2;
+        //        time_rutinas = 1;
+        //    }
 
         ComportamientoBoss();
 
@@ -170,10 +172,11 @@ public class BossFary : MonoBehaviour
     private void Update()
     {
         barra.fillAmount = HP_Min / HP_Max;
-        if(HP_Min > 0)
+        if (HP_Min > 0)
         {
             Vivo();
-        } else
+        }
+        else
         {
             if (!muerto)
             {

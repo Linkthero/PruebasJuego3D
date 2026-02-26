@@ -89,27 +89,6 @@ public class BossPaquirrin : MonoBehaviour
                 switch (rutina)
                 {
                     case 0:
-                    //    //WALK
-                    //    transform.rotation = Quaternion.RotateTowards(transform.rotation, rotation, 2); //gira hacia el jugador lentamente para que no sea tan brusco el movimiento, 2 es la velocidad de giro
-                    //    animator.SetBool("walk", true); //activa la animacion de caminar
-                    //    animator.SetBool("run", false);//desactiva la animacion de correr
-
-                    //    if (transform.rotation == rotation)
-                    //    {
-                    //        transform.Translate(Vector3.forward * velocidad * Time.deltaTime);  //mueve hacia el jugador a velocidad normal
-                    //    }
-
-                    //    animator.SetBool("attack", false);  //desactiva la animacion de ataque
-
-                    //    cronometro += 1 * Time.deltaTime;   //aumenta el cronometro para cambiar de rutina cada cierto tiempo
-                    //    if (cronometro > time_rutinas)  //si el cronometro es mayor que el tiempo de rutina, cambia de rutina aleatoriamente entre 0, 1 y 2 (walk, run y ataque) y resetea el cronometro
-                    //    {
-                    //        rutina = Random.Range(0, 2);
-                    //        cronometro = 0;
-                    //    }
-                    //    break;
-
-                    //case 1:
                         //RUN
                         transform.rotation = Quaternion.RotateTowards(transform.rotation, rotation, 2); //gira hacia el jugador
                         animator.SetBool("walk", false);
