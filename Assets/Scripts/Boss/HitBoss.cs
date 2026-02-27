@@ -10,6 +10,7 @@ public class HitBoss : MonoBehaviour
         {
             other.GetComponent<Player>().HP_Min -= damage;
             Debug.Log("HAGO DAÑO A PLAYER");
+            GetComponent<SphereCollider>().enabled = false;
         }
     }
 }

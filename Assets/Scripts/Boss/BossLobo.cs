@@ -41,7 +41,8 @@ public class BossLobo : MonoBehaviour
 
     public void ComportamientoBoss()
     {
-        if (Vector3.Distance(transform.position, target.transform.position) < 15)       //si el jugador esta a menos de 15 metros, el boss lo persigue y ataca
+        //Debug.Log(Vector3.Distance(transform.position, target.transform.position));
+        if (Vector3.Distance(transform.position, target.transform.position) < 20)       //si el jugador esta a menos de 15 metros, el boss lo persigue y ataca
         {
             var lookPos = target.transform.position - transform.position;   //calcula la direccion hacia el jugador
             lookPos.y = 0; //para que no mire hacia arriba o abajo, solo en el plano horizontal
@@ -51,12 +52,12 @@ public class BossLobo : MonoBehaviour
             cronometro += 1 * Time.deltaTime;   //aumenta el cronometro para cambiar de rutina cada cierto tiempo
             if (cronometro > time_rutinas)  //si el cronometro es mayor que el tiempo de rutina, cambia de rutina aleatoriamente entre 0, 1 y 2  y resetea el cronometro
             {
-                rutina = Random.Range(0, 4);
-                //Debug.Log("Rutina: " + rutina);
+                rutina = Random.Range(0, 2);
+                Debug.Log("Rutina: " + rutina);
                 cronometro = 0;
             }
 
-            if (Vector3.Distance(transform.position, target.transform.position) > 1 && !atacando)   //
+            if (Vector3.Distance(transform.position, target.transform.position) > 1 && !atacando)   
             {
                 switch (rutina)
                 {
@@ -70,47 +71,34 @@ public class BossLobo : MonoBehaviour
                         {
                             transform.Translate(Vector3.forward * velocidadPersecucion * Time.deltaTime);   //se mueve hacia el jugador
                         }
-                        Debug.Log("CORRE");
+                        //Debug.Log("CORRE");
                         break;
+
+                    //case 1:
+                    //    //ATAQUE MELEE
+                    //    if (Vector3.Distance(transform.position, target.transform.position) < 2)
+                    //    {
+
+                    //        Debug.Log("ATACA");
+                    //        atacando = true;
+                    //        transform.rotation = Quaternion.RotateTowards(transform.rotation, rotation, 2); //gira hacia el jugador
+                    //        animator.SetBool("walk", false);
+                    //        animator.SetBool("run", false);
+                    //        animator.SetBool("attack", true);
+                    //        animator.SetFloat("skills", 0);
+
+                    //    }
+
+                    //    break;
 
                     case 1:
-                        //ATAQUE MELEE
-                        Debug.Log(Vector3.Distance(transform.position, target.transform.position));
-                        if (Vector3.Distance(transform.position, target.transform.position) < 2)
-                        {
-
-                            Debug.Log("ATACA");
-                            atacando = true;
-                            transform.rotation = Quaternion.RotateTowards(transform.rotation, rotation, 2); //gira hacia el jugador
-                            animator.SetBool("walk", false);
-                            animator.SetBool("run", false);
-                            animator.SetBool("attack", true);
-                            animator.SetFloat("skills", 0);
-
-                        }
-
-                        break;
-
-                    case 2:
                         //Ataque magico 
                         animator.SetBool("walk", false);
                         animator.SetBool("run", false);
                         animator.SetBool("attack", true);
-                        animator.SetFloat("skills", 0.5f);
-
-
-
-                        break;
-
-                    case 3:
-                        //BLOCK
-                        animator.SetBool("walk", false);
-                        animator.SetBool("run", false);
-                        animator.SetBool("attack", true);
                         animator.SetFloat("skills", 1f);
-
+                        atacando = true;
                         break;
-
 
                 }
             }
@@ -120,6 +108,8 @@ public class BossLobo : MonoBehaviour
             animator.SetBool("walk", false);
             animator.SetBool("run", false);
             animator.SetBool("attack", false);
+            cronometro = 0;
+            atacando = false;
         }
     }
 
@@ -135,7 +125,7 @@ public class BossLobo : MonoBehaviour
     public void CreaRayos()
     {
         GameObject rayos = Instantiate(rayosPrefab, target.transform.position, Quaternion.identity);
-        Destroy(rayos, 3f);
+        Destroy(rayos, 2f);
     }
 
 
