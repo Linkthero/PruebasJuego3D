@@ -45,6 +45,7 @@ public class BossCigala : MonoBehaviour
         target = GameObject.Find("Player");
     }
 
+    ///COMPORTAMIENTO DEL BOSS, SE LLAMA EN EL UPDATE//
     public void ComportamientoBoss()
     {
         if (Vector3.Distance(transform.position, target.transform.position) < 15)       //si el jugador esta a menos de 15 metros, el boss lo persigue y ataca
@@ -52,13 +53,11 @@ public class BossCigala : MonoBehaviour
             var lookPos = target.transform.position - transform.position;   //calcula la direccion hacia el jugador
             lookPos.y = 0; //para que no mire hacia arriba o abajo, solo en el plano horizontal
             var rotation = Quaternion.LookRotation(lookPos); //gira hacia el jugador
-            //musica.enabled = true;
 
             cronometro += 1 * Time.deltaTime;   //aumenta el cronometro para cambiar de rutina cada cierto tiempo
             if (cronometro > time_rutinas)  //si el cronometro es mayor que el tiempo de rutina, cambia de rutina aleatoriamente entre 0, 1 y 2  y resetea el cronometro
             {
-                rutina = Random.Range(0, 4);
-                //Debug.Log("Rutina: " + rutina);
+                rutina = Random.Range(0, 3);
                 cronometro = 0;
             }
 
@@ -103,40 +102,41 @@ public class BossCigala : MonoBehaviour
                         animator.SetBool("attack", true);
                         animator.SetFloat("skills", 0);
                         transform.rotation = Quaternion.RotateTowards(transform.rotation, rotation, 2);
-                        rango.GetComponent<CapsuleCollider>().enabled = false;
+                        //rango.GetComponent<CapsuleCollider>().enabled = false;
 
                         break;
                 }
             }
         } else
          {
+            //si jugador no esta cerca se queda tieso
             animator.SetBool("walk", false);
             animator.SetBool("run", false);
             animator.SetBool("attack", false);
          }
     }
 
-
+    //NO TOCAR s llama en animaciones
     public void Final_AniBoss()
     {
         rutina = 0;
         animator.SetBool("attack", false);
         atacando = false;
-        rango.GetComponent<CapsuleCollider>().enabled = true;
+        //rango.GetComponent<CapsuleCollider>().enabled = true;
         lanzallamas = false;
     }
-
+    //activa collider arma
     public void ColliderWeaponTrue()
     {
         hit[hit_select].GetComponent<SphereCollider>().enabled = true;
     }
-
+    //desactiva collider arma
     public void ColliderWeaponFalse()
     {
         hit[hit_select].GetComponent<SphereCollider>().enabled = false;
     }
 
-    //Lanzallamas
+    //obtiene bala
     public GameObject GetBala()
     {
         for (int i = 0; i < pool.Count; i++)
@@ -152,6 +152,7 @@ public class BossCigala : MonoBehaviour
         return obj;
     }
 
+    //Ataque Lanzallamas(ataque 1)
     public void Lanzallamas_Skill()
     {
         cronometro2 += 1 * Time.deltaTime;
@@ -163,27 +164,23 @@ public class BossCigala : MonoBehaviour
             cronometro2 = 0;
         }
     }
-
+    //metodo auxiliar de lanzallamas
     public void Start_Fire()
     {
         lanzallamas = true;
     }
 
+    //metodo auxiliar de lanzallanmas
     public void Stop_Fire()
     {
         lanzallamas = false;
     }
 
-
-
+    //qué hace si está vivo
     public void Vivo()
     {
         ComportamientoBoss();
 
-        //if (lanzallamas)
-        //{
-        //    Lanzallamas_Skill();
-        //}
     }
 
     private void Update()

@@ -38,7 +38,7 @@ public class BossLobo : MonoBehaviour
         animator = GetComponent<Animator>();
         target = GameObject.Find("Player");
     }
-
+    //Comportamiento boss
     public void ComportamientoBoss()
     {
         //Debug.Log(Vector3.Distance(transform.position, target.transform.position));
@@ -71,25 +71,7 @@ public class BossLobo : MonoBehaviour
                         {
                             transform.Translate(Vector3.forward * velocidadPersecucion * Time.deltaTime);   //se mueve hacia el jugador
                         }
-                        //Debug.Log("CORRE");
                         break;
-
-                    //case 1:
-                    //    //ATAQUE MELEE
-                    //    if (Vector3.Distance(transform.position, target.transform.position) < 2)
-                    //    {
-
-                    //        Debug.Log("ATACA");
-                    //        atacando = true;
-                    //        transform.rotation = Quaternion.RotateTowards(transform.rotation, rotation, 2); //gira hacia el jugador
-                    //        animator.SetBool("walk", false);
-                    //        animator.SetBool("run", false);
-                    //        animator.SetBool("attack", true);
-                    //        animator.SetFloat("skills", 0);
-
-                    //    }
-
-                    //    break;
 
                     case 1:
                         //Ataque magico 
@@ -105,6 +87,7 @@ public class BossLobo : MonoBehaviour
         }
         else
         {
+            //si no encuentra a jugador se queda tieso
             animator.SetBool("walk", false);
             animator.SetBool("run", false);
             animator.SetBool("attack", false);
@@ -113,7 +96,7 @@ public class BossLobo : MonoBehaviour
         }
     }
 
-
+    //NO TOCAR se llama en animaciones
     public void Final_AniBoss()
     {
         rutina = 0;
@@ -122,18 +105,20 @@ public class BossLobo : MonoBehaviour
         rango.GetComponent<CapsuleCollider>().enabled = true;
     }
 
+    //ataque magico
     public void CreaRayos()
     {
         GameObject rayos = Instantiate(rayosPrefab, target.transform.position, Quaternion.identity);
         Destroy(rayos, 2f);
     }
 
-
+    //activa arma cuerpo a cuerpo
     public void ColliderWeaponTrue()
     {
         hit[hit_select].GetComponent<SphereCollider>().enabled = true;
     }
 
+    //desactiva arma cuerpo a cuerpo
     public void ColliderWeaponFalse()
     {
         hit[hit_select].GetComponent<SphereCollider>().enabled = false;
@@ -144,19 +129,8 @@ public class BossLobo : MonoBehaviour
 
     public void Vivo()
     {
-        //{
-        //    if(HP_Min < 500)
-        //    {
-        //        fase = 2;
-        //        time_rutinas = 1;
-        //    }
 
         ComportamientoBoss();
-
-        //if(lanzallamas)
-        //{
-        //    Lanzallamas_Skill();
-        //}
     }
 
     private void Update()
@@ -172,7 +146,6 @@ public class BossLobo : MonoBehaviour
             {
                 animator.SetBool("dead", true);
                 muerto = true;
-                //musica.enabled = false;
             }
         }
     }

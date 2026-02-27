@@ -22,6 +22,7 @@ public class BossFary : MonoBehaviour
 
     public int hit_select;
 
+    //ataque magico
     public GameObject rayosPrefab;
 
     [Header("Vida")]
@@ -39,6 +40,7 @@ public class BossFary : MonoBehaviour
         target = GameObject.Find("Player");
     }
 
+    //Comportamiento del boss
     public void ComportamientoBoss()
     {
         if (Vector3.Distance(transform.position, target.transform.position) < 15)       //si el jugador esta a menos de 15 metros, el boss lo persigue y ataca
@@ -56,7 +58,7 @@ public class BossFary : MonoBehaviour
                 cronometro = 0;
             }
 
-            if (Vector3.Distance(transform.position, target.transform.position) > 1 && !atacando)   //
+            if (Vector3.Distance(transform.position, target.transform.position) > 1 && !atacando)   
             {
                 switch (rutina)
                 {
@@ -97,9 +99,6 @@ public class BossFary : MonoBehaviour
                         animator.SetBool("run", false);
                         animator.SetBool("attack", true);
                         animator.SetFloat("skills", 0.5f);
-
-                       
-
                         break;
 
                     case 3:
@@ -116,13 +115,14 @@ public class BossFary : MonoBehaviour
             }
         } else
         {
+            //si no detecta jugador está tieso
             animator.SetBool("walk", false);
             animator.SetBool("run", false);
             animator.SetBool("attack", false);
         }
     }
 
-
+    //NO TOCAR se llama en animaciones
     public void Final_AniBoss()
     {
         rutina = 0;
@@ -131,18 +131,19 @@ public class BossFary : MonoBehaviour
         rango.GetComponent<CapsuleCollider>().enabled = true;
     }
 
+    //ataque magico
     public void CreaRayos()
     {
         GameObject rayos = Instantiate(rayosPrefab, target.transform.position, Quaternion.identity);
         Destroy(rayos, 3f);
     }
 
-
+    //activa arma cuerpo a cuerpo
     public void ColliderWeaponTrue()
     {
         hit[hit_select].GetComponent<SphereCollider>().enabled = true;
     }
-
+    //desactiva arma cuerpo a cuerpo
     public void ColliderWeaponFalse()
     {
         hit[hit_select].GetComponent<SphereCollider>().enabled = false;
@@ -150,21 +151,9 @@ public class BossFary : MonoBehaviour
 
 
 
-
+    //comportamiento mientras esté vivo
     public void Vivo() { 
-    //{
-    //    if(HP_Min < 500)
-    //    {
-    //        fase = 2;
-    //        time_rutinas = 1;
-    //    }
-
         ComportamientoBoss();
-
-        //if(lanzallamas)
-        //{
-        //    Lanzallamas_Skill();
-        //}
     }
 
     private void Update()
@@ -179,7 +168,6 @@ public class BossFary : MonoBehaviour
             {
                 animator.SetBool("dead", true);
                 muerto = true;
-                //musica.enabled = false;
             }
         }
     }
