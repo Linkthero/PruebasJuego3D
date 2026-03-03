@@ -2,19 +2,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class BossCigala : MonoBehaviour
+public class BossCigala : Boss
 {
     //Codigo enemigo base //
     [Header("Codigo enemigo base")]
     public int rutina;
     public float cronometro;
     public float time_rutinas;
-    private Animator animator;  //se pilla en el start
     public Quaternion angulo;
     public float grado;
-    private GameObject target;   //se pilla en el start
-    //public float speed;
-    public int velocidadPersecucion = 3;
     public bool atacando;
     public RangoBoss rango;
     public GameObject[] hit;
@@ -30,20 +26,7 @@ public class BossCigala : MonoBehaviour
     public GameObject cabeza;   //punto donde salen las esferas
     private float cronometro2;      //tiempo entre esferas
 
-    [Header("Vida")]
-    public int fase = 1;    //fase boss
-    public float HP_Min;    //vida minima
-    public float HP_Max;    //vida maxima
-    public Image barra;   //barra de vida
-    //public AudioSource musica; //musica batalla
-    public bool muerto;     //boss muerto
 
-
-    private void Start()
-    {
-        animator = GetComponent<Animator>();
-        target = GameObject.Find("Player");
-    }
 
     ///COMPORTAMIENTO DEL BOSS, SE LLAMA EN EL UPDATE//
     public void ComportamientoBoss()

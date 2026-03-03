@@ -3,19 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class BossPaquirrin : MonoBehaviour
+public class BossPaquirrin : Boss
 {
     //Codigo enemigo base //
     [Header("Codigo enemigo base")]
     public int rutina;
     public float cronometro;
     public float time_rutinas;
-    public Animator animator;
     public Quaternion angulo;
     public float grado;
-    public GameObject target;
-    public float speed;
-    public int velocidadPersecucion = 3;
     public bool atacando;
     public RangoBoss rango;
     public GameObject[] hit;
@@ -31,19 +27,10 @@ public class BossPaquirrin : MonoBehaviour
     
     public int hit_select;
 
-    [Header("Vida")]
-    public int fase = 1;    //fase boss
-    public float HP_Min;    //vida minima
-    public float HP_Max;    //vida maxima
-    public Image barra;   //barra de vida
-    //public AudioSource musica; //musica batalla
-    public bool muerto;     //boss muerto
 
 
     private void Start()
     {
-        animator = GetComponent<Animator>();
-        target = GameObject.Find("Player");
         listaMinioms = new List<GameObject>();
     }
 
